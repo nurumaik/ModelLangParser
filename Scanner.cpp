@@ -247,7 +247,7 @@ Scanner::O_o::O_o() {
 }
 
 Scanner::WrongDelimiterException::WrongDelimiterException(int strId, const string& delim) {
-	sprintf(mMessage, "Unexpected delimiter %d at line %d", delim.c_str()[0], strId);
+	sprintf(mMessage, "Unexpected delimiter %c with code %d at line %d", delim.c_str(), delim.c_str()[0], strId);
 }
 
 Scanner::CommentWithoutEndException::CommentWithoutEndException(int strId) {
