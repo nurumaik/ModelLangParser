@@ -43,7 +43,7 @@ Lex Scanner::getLex() {
 				mState = SLASH;
 			}
 			else
-				mState = DELIM;
+				mState = DELIM; 
 			break;
 		case STRING:
 			if (mInput.eof())
@@ -229,3 +229,34 @@ Scanner::Scanner(const string& fileName) :
 {
 	getNextChar();	
 }
+
+Scanner::LexerException::LexerException() {
+
+}
+
+Scanner::LexerException::LexerException(int strId) {
+	sprintf(mMessage, "Error at line %d\n", strId);
+}
+
+const char* Scanner::LexerException::what() const noexcept {
+	return mMessage;
+}
+
+Scanner::O_o::O_o() {
+	strcpy(mMessage, "O_o");
+}
+
+Scanner::WrongDelimiterException::WrongDelimiterException(int strId, const string& delim) {
+	sprintf(mMessage, "Unexpected delimiter %d at line %d", delim.c_str()[0], strId);
+}
+
+Scanner::CommentWithoutEndException::CommentWithoutEndException(int strId) {
+	sprintf(mMessage, "Unexpected EOF at line %d: comment without end\n", strId);
+}
+
+Scanner::StringWithoutEndException::StringWithoutEndException(int strId) {
+	sprintf(mMessage, "Unexpected EOF at line %d: string without end\n", strId);
+}
+
+
+Scanner::LexerException::

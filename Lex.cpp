@@ -89,3 +89,11 @@ Lex Lex::genNullLex() {
 	l.mLexType = LEX_NULL;
 	return l;
 }
+
+Lex::WrongTypeException::WrongTypeException(TYPE_OF_LEX expectation, TYPE_OF_LEX reality) { //Ожидание - реальность
+	sprintf(mMessage, "Wrong lex type! Expected %d type, got %d type.", expectation, reality);
+}
+
+const char* Lex::WrongTypeException::what() const noexcept {
+	return mMessage;
+}

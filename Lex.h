@@ -12,13 +12,9 @@ class Lex {
 public:
 	class WrongTypeException : public exception {
 	public:
-		WrongTypeException(TYPE_OF_LEX expectation, TYPE_OF_LEX reality) { //Ожидание - реальность
-			sprintf(mMessage, "Wrong lex type! Expected %d type, got %d type.", expectation, reality);
-		}
+		WrongTypeException(TYPE_OF_LEX expectation, TYPE_OF_LEX reality);
 
-		virtual const char* what() const noexcept {
-			return mMessage;
-		}
+		virtual const char* what() const noexcept;
 	private:
 		char mMessage[255];
 	};

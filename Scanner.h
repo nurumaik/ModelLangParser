@@ -19,48 +19,33 @@ class Scanner {
 public:
 	class LexerException : public exception {
 	public:
-		LexerException() {
+		LexerException();
 
-		}
+		LexerException(int strId);
 
-		LexerException(int strId)/* : mStringNumber(strId)*/ {
-			sprintf(mMessage, "Error at line %d\n", strId);
-		}
-
-		virtual const char* what() const noexcept {
-			return mMessage;
-		}
+		virtual const char* what() const noexcept;
 	protected:
-		//unsigned int mStringNumber;
 		char mMessage [255];
 	};
 
 	class StringWithoutEndException : public LexerException {
 	public:
-		StringWithoutEndException(int strId) {
-			sprintf(mMessage, "Unexpected EOF at line %d: string without end\n", strId);
-		}
+		StringWithoutEndException(int strId);
 	};
 
 	class CommentWithoutEndException : public LexerException {
 	public:
-		CommentWithoutEndException(int strId) {
-			sprintf(mMessage, "Unexpected EOF at line %d: comment without end\n", strId);
-		}
+		CommentWithoutEndException(int strId);
 	};
 
 	class WrongDelimiterException : public LexerException {
 	public:
-		WrongDelimiterException(int strId, const string& delim) {
-			sprintf(mMessage, "Unexpected delimiter %s at line %d", delim.c_str(), strId);
-		}
+		WrongDelimiterException(int strId, const string& delim);
 	};
 
 	class O_o : public LexerException {
 	public:
-		O_o() {
-			strcpy(mMessage, "O_o");
-		}
+		O_o();
 	};
 
 	Lex getLex();
